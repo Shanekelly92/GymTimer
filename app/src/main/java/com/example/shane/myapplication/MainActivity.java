@@ -55,11 +55,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Button startButton = (Button) findViewById(R.id.restartButton);
-//        startButton.setVisibility(View.GONE);
-//        createTimer(0);
-//        disableStopButton();
-//        disableResetButton();
         allignGUIWithStatus();
     }
 
@@ -90,9 +85,6 @@ public class MainActivity extends Activity {
         if (tmr != null) tmr.cancel();
         tmr = new CountDownTimer(time, 1000) {
             public void onTick(long millisUntilFinished) {
-//                EditText counter = (EditText) findViewById(R.id.counter);
-//                counter.setText("" + millisUntilFinished / 1000);
-//                millSecondsOnClock = millisUntilFinished;
                 millSecondsOnClock = millisUntilFinished;
                 updateCounter();
             }
@@ -101,7 +93,6 @@ public class MainActivity extends Activity {
                 Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                 // Vibrate for 500 milliseconds
                 v.vibrate(500);
-
                 View view = getWindow().getDecorView().findViewById(android.R.id.content);
                 resetCounter(view);
                 showAlarm(view);
@@ -116,7 +107,6 @@ public class MainActivity extends Activity {
                 MainActivity.this);
 
         alertDialogBuilder.setTitle("Timer");
-
         alertDialogBuilder
                 .setMessage("Time Up!")
                 .setCancelable(false)
@@ -127,7 +117,6 @@ public class MainActivity extends Activity {
                     }
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
-
 
         // show it
         alertDialog.show();
@@ -142,12 +131,7 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -161,32 +145,23 @@ public class MainActivity extends Activity {
         tmr.start();
         status = Status.RUNNING;
         allignGUIWithStatus();
-//        enableStopButton();
-//        enableResetButton();
     }
 
     public void stopCounter(View view){
         tmr.cancel();
         status = Status.STOPPED;
         allignGUIWithStatus();
-//        showRestartButton();
     }
 
     public void resetCounter(View view){
         millSecondsOnClock = 0;
         createTimer(millSecondsOnClock);
-//        EditText counter = (EditText) findViewById(R.id.counter);
-//        counter.setText(""+millSecondsOnClock);
         updateCounter();
-//        showStopButton();
-//        disableStopButton();
-//        disableResetButton();
         status = Status.NEW;
         allignGUIWithStatus();
     }
 
     public void restartCounter(View view) {
-//        showStopButton();
         createTimer(millSecondsOnClock);
         tmr.start();
         status = Status.RUNNING;
@@ -246,22 +221,6 @@ public class MainActivity extends Activity {
             return rootView;
         }
     }
-//
-//    public static class AdFragment extends Fragment {
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            return inflater.inflate(R.layout.fragment_ad, container, false);
-//        }
-//
-//        @Override
-//        public void onActivityCreated(Bundle bundle) {
-//            super.onActivityCreated(bundle);
-//            AdView mAdView = (AdView) getView().findViewById(R.id.adView);
-//            AdRequest adRequest = new AdRequest.Builder().build();
-//            mAdView.loadAd(adRequest);
-//        }
-//    }
 
 
     /**
@@ -299,7 +258,6 @@ public class MainActivity extends Activity {
             return inflater.inflate(R.layout.fragment_ad, container, false);
         }
 
-        /** Called when leaving the activity */
         @Override
         public void onPause() {
             if (mAdView != null) {
@@ -308,7 +266,6 @@ public class MainActivity extends Activity {
             super.onPause();
         }
 
-        /** Called when returning to the activity */
         @Override
         public void onResume() {
             super.onResume();
@@ -317,7 +274,6 @@ public class MainActivity extends Activity {
             }
         }
 
-        /** Called before the activity is destroyed */
         @Override
         public void onDestroy() {
             if (mAdView != null) {
